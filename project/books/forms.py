@@ -1,5 +1,6 @@
 from django import forms
-from .models import Reader, Book
+
+from .models import Reader
 
 
 class CreateReaderForm(forms.ModelForm):

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import ReaderListView, ReaderDetailView, ReaderCreateView, BookView
+from .views import BookView, ReaderCreateView, ReaderDetailView, ReaderListView
 
 urlpatterns = [
     path("", ReaderListView.as_view(), name="reader-list"),

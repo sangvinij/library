@@ -1,4 +1,7 @@
 [flake8]
+ignore = S101, S105, S106, B101, W503, Q000, E402, JS101, JS102
+per-file-ignores =
+    project/create_default_db_data.py: I100
 max-line-length = 120
 
 exclude =

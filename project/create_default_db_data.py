@@ -14,7 +14,7 @@ from django.conf import settings
 if not settings.configured:
     django.setup()
 
-from books.models import Book, Author
+from books.models import Author, Book
 
 User = get_user_model()
 

@@ -1,12 +1,12 @@
 import datetime
 
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
-from django.http import HttpResponse
 
-from .models import Reader, Book
 from .forms import CreateReaderForm
+from .models import Book, Reader
 
 
 class ReaderListView(View):

@@ -1,0 +1,19 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h1>Список читателей</h1>
+    </div>
+    <div class="list-group">
+        {% for reader in readers %}
+        <a href="{% url 'reader-detail' pk=reader.id %}" class="list-group-item list-group-item-action">{{ reader }}</a>
+        {% endfor %}
+    </div>
+    <p></p>
+    <div style="margin-top: 30;">
+        <a href="{% url 'reader-create' %}" class="btn btn-primary" role="button">Добавить читателя</a>
+    </div>
+
+</div>
+{% endblock %}

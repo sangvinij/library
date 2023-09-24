@@ -1,0 +1,37 @@
+{% extends 'books/base.html' %}
+{% block nav %}
+<div class="nav-item" style="color: white;">
+    {{reader}}
+</div>
+{% endblock %}
+{% block content %}
+
+<h2>Книги читателя</h2>
+<div>
+    <p>
+        <a href="{% url 'book' %}" class="btn btn-primary" role="button">Список доступных книг</a>
+    </p>
+</div>
+
+<div class="row">
+    {% for book in books %}
+    <div class="col-sm-6 mb-3 mb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Код: {{ book.id }}</h6>
+                <p class="card-text">{{ book.author }}</p>
+                <p class="card-text">Дата выдачи: {{ book.date_deliver }}</p>
+                <p class="card-text">Читатель: {{ book.reader }}</p>
+                <form method="post" action="{% url 'reader-detail' pk=reader.id %}">
+                    {% csrf_token %}
+                    <input type="text" name="book_id" value="{{ book.id }}" readonly style="display: None">
+                    <input type="submit" class="btn btn-primary" value="сдать книгу">
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

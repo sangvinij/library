@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 120
+
+exclude =
+    .artifacts
+    .git
+    .idea
+    .local
+    .venv
+    .vscode
+    */migrations/*
+    project/manage.py

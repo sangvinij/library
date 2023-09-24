@@ -1,0 +1,68 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<p></p>
+<h2>Доступные книги</h2>
+
+<div class="row">
+    {% for book in books_in_stock %}
+    <div class="col-sm-6 mb-3 mb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Код: {{ book.id }}</h6>
+                <p class="card-text">Автор: {{ book.author }}</p>
+                <p class="card-text">Дата сдачи: {% if book.date_hand_in %}{{ book.date_hand_in }}{% else %}Не выдавалась{% endif %}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Книги на выдаче</h2>
+<div class="row">
+    {% for book in books_on_delivery %}
+    <div class="col-sm-6 mb-3 mb-sm-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Код: {{ book.id }}</h6>
+                <p class="card-text">Автор: {{ book.author }}</p>
+                <p class="card-text">Дата выдачи: {{ book.date_deliver }}</p>
+                <p class="card-text">Читатель: {{ book.reader }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div>
+    <form style="width: 25%;" action="{% url 'book' %}" method="post">
+        {% csrf_token %}
+        <legend>Взять книгу</legend>
+        <div>
+            <p>Код книги:
+                <select class="form-select form-select-sm" name="book_id">
+                    {% for book in books_in_stock %}
+                    <option value="{{ book.id }}">{{ book.id }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <div>
+            <p>Читатель:
+                <select class="form-select form-select-sm" name="reader_id">
+                    {% for reader in readers %}
+                    <option value="{{ reader.id }}">{{ reader }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="submit" class="btn btn-primary" value="Взять книгу">
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+<div>
+    <h3>Добавить читателя</h3>
+    <form method="post" action="{% url 'reader-create' %}">
+        {% csrf_token %}
+
+        <div class="form-floating">
+            <input type="text" class="form-control" name="last_name" required>
+            <label class="form-label">Фамилия</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" name="first_name" required>
+            <label class="form-label">Имя</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" name="patronymic" required>
+            <label class="form-label">Отчество</label>
+        </div>
+        <p></p>
+        <div class="form-floating mb-3">
+            <input type="submit" class="btn btn-primary" value="Добавить">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+name: build
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4.5.0
+
+        with:
+          python-version: "3.11.5"
+
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v8
+        with:
+          poetry-version: '1.6.1'
+
+      - name: Install requirements
+        run: poetry install
+
+      - name: Run black
+        run: poetry run black . --check
+
+      - name: Run Flake8
+        run: poetry run flake8 .

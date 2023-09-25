@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env.SECRET_KEY
 
-DEBUG = True
+DEBUG = env.DEBUG
 
 ALLOWED_HOSTS = env.ALLOWED_HOSTS.split(",")
 
@@ -54,7 +54,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "project.wsgi.application"
 
 
-DATABASES = {"default": dj_database_url.parse(env.DATABASE_URL, conn_max_age=600)}
+DATABASES = {"default": dj_database_url.parse(env.DATABASE_URL)}
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -75,7 +75,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ru"
 
-TIME_ZONE = "utc"
+TIME_ZONE = "Europe/Minsk"
 
 USE_I18N = True
 

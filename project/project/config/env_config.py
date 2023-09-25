@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from typing import Optional
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -15,6 +16,7 @@ class Settings(BaseSettings):
     SUPERUSER_USERNAME: str
     SUPERUSER_PASSWORD: str
     ALLOWED_HOSTS: str
+    DEBUG: Optional[bool] = False
 
 
 env = Settings()

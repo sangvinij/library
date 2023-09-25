@@ -49,11 +49,8 @@ jobs:
               echo "MYSQL_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
               echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
 
-      - name: start database
-        run: docker compose up -d db
-
-      - name: start webapp
-        run: docker compose up -d webapp
+      - name: start
+        run: docker compose up -d
 
       - name: stop services
         run: docker-compose stop

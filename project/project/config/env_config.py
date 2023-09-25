@@ -20,4 +20,3 @@ class Settings(BaseSettings):
 
 
 env = Settings()
-

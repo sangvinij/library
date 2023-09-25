@@ -1,6 +1,6 @@
-from django import forms
-
 from .models import Reader
+
+from django import forms
 
 
 class CreateReaderForm(forms.ModelForm):

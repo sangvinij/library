@@ -50,10 +50,10 @@ jobs:
               echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
 
       - name: start database
-        run: docker-compose up db -d
+        run: docker compose up -d db
 
       - name: start webapp
-        run: docker-compose up webapp -d
+        run: docker compose up -d webapp
 
       - name: stop services
         run: docker-compose stop

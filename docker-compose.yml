@@ -1,0 +1,51 @@
+version: '3.9'
+services:
+
+  db:
+    container_name: library.db
+    image: mysql:8.1.0
+    command: --default-authentication-plugin=caching_sha2_password
+    networks: 
+      - library
+    ports:
+      - "3306:3306"
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - .local/services/db:/var/lib/db/mysql/data
+    init: true
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  webapp:
+    build:
+      args:
+        - PIP_VERSION=${WEBAPP_PIP_VERSION:-23.2.21}
+        - POETRY_VERSION=${WEBAPP_POETRY_VERSION:-1.6.1}
+        - PYTHON_VERSION=${WEBAPP_PYTHON_VERSION:-3.11}
+        - VERSION=${WEBAPP_VERSION:-dev}
+      context: .
+    container_name: library.webapp
+    image: library_webapp:latest
+    env_file:
+      - .env
+    networks:
+      - library
+    ports:
+      - "8000:8000"
+    volumes:
+      - .local/services/webapp:/app/:ro
+    init: true
+    depends_on:
+      db:
+        condition: service_healthy
+
+networks:
+  library:
+    name: library.network
+    driver: bridge

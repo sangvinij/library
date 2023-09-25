@@ -47,7 +47,7 @@ jobs:
               echo "DEBUG=${{ secrets.DEBUG }}" >> .env
               echo "MYSQL_USER=${{ secrets.POSTGRES_USER }}" >> .env
               echo "MYSQL_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
-              echo"MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
+              echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
 
       - name: build
         run: docker-compose up -d

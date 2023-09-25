@@ -1,8 +1,7 @@
-import datetime
-
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils import timezone
 from django.views import View
 
 from .forms import CreateReaderForm
@@ -47,7 +46,7 @@ class ReaderDetailView(View):
 
         book.status = "in_stock"
         book.reader = None
-        book.date_hand_in = datetime.datetime.utcnow()
+        book.date_hand_in = timezone.now()
         book.date_deliver = None
         book.save()
 
@@ -82,7 +81,7 @@ class BookView(View):
 
         book.reader = reader
         book.status = "on_delivery"
-        book.date_deliver = datetime.datetime.utcnow()
+        book.date_deliver = timezone.now()
         book.date_hand_in = None
 
         book.save()

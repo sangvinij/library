@@ -45,7 +45,7 @@ After completing these steps, the project will be running and available at [http
 
 ## Creating superuser
 
-If you already followed the **[Run via Docker Compose](#run-via-docker-compose)** section steps or completed the step **7** of **[Run locally](#run-locally)** instruction, superuser will be automatically created in webapp container with the credentials provided in `.env` variables `SUPERUSER_USERNAME` and `SUPERUSER_PASSWORD`.
+If you already followed the **[Run via Docker Compose](#run-via-docker-compose)** section steps or completed the step **7** of **[Run locally](#run-locally)** instruction, superuser will be automatically created with the credentials provided in `.env` variables `SUPERUSER_USERNAME` and `SUPERUSER_PASSWORD`.
 This superuser can be used to get access to the django admin panel which is available at [http://localhost:8000/admin](http://localhost:8000/admin).
 If you want to create another superuser you can also run command `python project/manage.py cratesuperuser` and followed the instructions in console.
 

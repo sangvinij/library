@@ -1,0 +1,55 @@
+name: build
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4.5.0
+
+        with:
+          python-version: "3.11.5"
+
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v8
+        with:
+          poetry-version: '1.6.1'
+
+      - name: Install requirements
+        run: poetry install
+
+      - name: Run black
+        run: poetry run black . --check
+
+      - name: Run Flake8
+        run: poetry run flake8 .
+
+      - name: build
+        env:
+            PIP_VERSION: ${{ secrets.WEBAPP_PIP_VERSION || '23.2.21' }}
+            POETRY_VERSION: ${{ secrets.WEBAPP_POETRY_VERSION || '1.6.1' }}
+            PYTHON_VERSION: ${{ secrets.WEBAPP_PYTHON_VERSION || '3.11.5' }}
+            MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+            MYSQL_USER: ${{ secrets.POSTGRES_USER }}
+            MYSQL_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+            MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+            SECRET_KEY: ${{ secrets.SECRET_KEY }}
+            DATABASE_URL: ${{ secrets.DATABASE_URL }}
+            DEBUG: ${{ secrets.DEBUG }}
+            ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+            SUPERUSER_USERNAME: ${{ secrets.SUPERUSER_USERNAME }}
+            SUPERUSER_PASSWORD: ${{ secrets.SUPERUSER_USERNAME }}
+        run: docker-compose up -d
+
+      - name: stop services
+        run: docker-compose stop

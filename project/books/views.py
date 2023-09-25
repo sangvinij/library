@@ -30,7 +30,6 @@ class ReaderCreateView(View):
 class ReaderDetailView(View):
     queryset = Book.objects.select_related("author").select_related("reader")
 
-
     def get(self, request, pk):
         try:
             reader = Reader.objects.get(pk=pk)

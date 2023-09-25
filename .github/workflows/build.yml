@@ -34,21 +34,22 @@ jobs:
       - name: Run Flake8
         run: poetry run flake8 .
 
+      - name: create env file
+        run: |
+              echo "PIP_VERSION=${{ secrets.WEBAPP_PIP_VERSION || '23.2.21' }}" >> .env
+              echo "POETRY_VERSION={{ secrets.WEBAPP_POETRY_VERSION || '1.6.1' }}" >> .env
+              echo "PYTHON_VERSION=${{ secrets.WEBAPP_PYTHON_VERSION || '3.11.5' }}" >> .env
+              echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+              echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+              echo "SUPERUSER_USERNAME=${{ secrets.SUPERUSER_USERNAME }}" >> .env
+              echo "SUPERUSER_PASSWORD=${{ secrets.SUPERUSER_PASSWORD }}" >> .env
+              echo "ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}" >> .env
+              echo "DEBUG=${{ secrets.DEBUG }}" >> .env
+              echo "MYSQL_USER=${{ secrets.POSTGRES_USER }}" >> .env
+              echo "MYSQL_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+              echo"MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
+
       - name: build
-        env:
-            PIP_VERSION: ${{ secrets.WEBAPP_PIP_VERSION || '23.2.21' }}
-            POETRY_VERSION: ${{ secrets.WEBAPP_POETRY_VERSION || '1.6.1' }}
-            PYTHON_VERSION: ${{ secrets.WEBAPP_PYTHON_VERSION || '3.11.5' }}
-            MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-            MYSQL_USER: ${{ secrets.POSTGRES_USER }}
-            MYSQL_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-            MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-            SECRET_KEY: ${{ secrets.SECRET_KEY }}
-            DATABASE_URL: ${{ secrets.DATABASE_URL }}
-            DEBUG: ${{ secrets.DEBUG }}
-            ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-            SUPERUSER_USERNAME: ${{ secrets.SUPERUSER_USERNAME }}
-            SUPERUSER_PASSWORD: ${{ secrets.SUPERUSER_USERNAME }}
         run: docker-compose up -d
 
       - name: stop services

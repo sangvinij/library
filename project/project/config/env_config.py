@@ -17,6 +17,6 @@ class Settings(BaseSettings):
     SUPERUSER_PASSWORD: str
     ALLOWED_HOSTS: str
     DEBUG: Optional[bool] = False
-
+    CSRF_TRUSTED_ORIGINS: str
 
 env = Settings()

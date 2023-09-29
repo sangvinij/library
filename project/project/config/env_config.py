@@ -19,4 +19,5 @@ class Settings(BaseSettings):
     DEBUG: Optional[bool] = False
     CSRF_TRUSTED_ORIGINS: str
 
+
 env = Settings()

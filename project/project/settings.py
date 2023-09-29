@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import dj_database_url
@@ -83,5 +84,9 @@ USE_TZ = True
 
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True

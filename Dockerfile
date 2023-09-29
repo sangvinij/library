@@ -22,7 +22,7 @@ COPY . .
 
 # Runing the file as an executable script
 RUN chmod +x entrypoints/entrypoint.sh
-RUN chmod +x staticfiles/
+RUN chmod +x project/static/files
 
 # Changing user 
 USER newuser

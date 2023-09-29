@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import dj_database_url
+import django_heroku
 
 from .config.env_config import env
 
@@ -86,3 +87,5 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+django_heroku.settings(locals())
